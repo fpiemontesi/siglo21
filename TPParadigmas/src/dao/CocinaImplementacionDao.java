@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.dominio.Cocina;
 import modelo.dominio.Estado;
 import modelo.dominio.Usuario;
@@ -23,9 +25,11 @@ public class CocinaImplementacionDao extends ConexionDao implements CocinaDao {
     public ArrayList<Cocina> obtenerTodas() throws SQLException {
         ArrayList<Cocina> resultado = new ArrayList<Cocina>();
         try {
-            PreparedStatement consulta = conexion.prepareStatement("SELECT c.nombre, c.idUsuario, u.nombre as nombreUsuario, u.apellido as ApellidoUsuario, u.tipoUsuario, c.idEstado, e.nombre as NombreEstado, e.descripcion as DescripcionEstado, e.tiempoDemoraDesde, e.tiempoDemoraHasta FROM Cocina c"
-                    + "INNER JOIN Usuario u ON u.id = c.idUsuario"
-                    + "INNER JOIN Estado e ON e.id = c.idEstado");
+            String sql = "SELECT c.Nombre as NombreCocina, c.idUsuario, u.nombre as nombreUsuario, u.apellido as ApellidoUsuario, u.tipoUsuario, c.idEstado, e.nombre as NombreEstado, e.descripcion as DescripcionEstado, e.tiempoDemoraDesde, e.tiempoDemoraHasta "
+                    + "FROM Cocina c "
+                    + "INNER JOIN Usuario u ON u.id = c.idUsuario "
+                    + "INNER JOIN Estado e ON e.id = c.idEstado ";
+            PreparedStatement consulta = ConexionDao.obtener().prepareStatement(sql);
             
             Cocina cocina;
             Usuario cocinero;
@@ -34,12 +38,14 @@ public class CocinaImplementacionDao extends ConexionDao implements CocinaDao {
             while(rs.next()){
                cocinero = new Usuario(rs.getInt("idUsuario"), rs.getString("nombreUsuario"), rs.getString("apellidoUsuario"), rs.getString("tipoUsuario"));
                estado = new Estado(rs.getInt("idEstado"), rs.getString("nombreEstado"), rs.getString("descripcionEstado"), rs.getInt("tiempoDemoraDesde"), rs.getInt("tiempoDemoraHasta"));
-               cocina = new Cocina(rs.getString("nombre"), cocinero, estado);
+               cocina = new Cocina(rs.getString("NombreCocina"), cocinero, estado);
                
                resultado.add(cocina);
             }
         } catch (SQLException ex) {
             throw new SQLException(ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CocinaImplementacionDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultado;
     }

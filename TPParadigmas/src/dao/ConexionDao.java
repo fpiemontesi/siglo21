@@ -14,13 +14,13 @@ import java.sql.SQLException;
  * @author franc
  */
 public class ConexionDao {
-    protected static Connection conexion = null;
+    private static Connection conexion = null;
     
     public static Connection obtener() throws SQLException, ClassNotFoundException {
       if (conexion == null) {
          try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost/java_mysql", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pp", "root", "root");
          } catch (SQLException ex) {
             throw new SQLException(ex);
          } catch (ClassNotFoundException ex) {
