@@ -10,9 +10,19 @@ package modelo.dominio;
  * @author franc
  */
 public class Estado {
+    private int id;
     private String nombre;
     private String descripcion;
+    private int tiempoDemoraDesde;
     private int tiempoDemoraHasta;
+    
+    public Estado(int id, String nombre, String descripcion, int tiempoDemoraDesde, int tiempoDemoraHasta){
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tiempoDemoraDesde = tiempoDemoraDesde;
+        this.tiempoDemoraHasta = tiempoDemoraHasta;
+    }
 
     /**
      * @return the nombre

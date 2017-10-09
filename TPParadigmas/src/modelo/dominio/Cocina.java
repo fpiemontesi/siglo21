@@ -17,6 +17,12 @@ public class Cocina {
     private Usuario cocinero;
     private Estado estado;
 
+    public Cocina(String nombre, Usuario cocinero, Estado estado){
+        this.nombre = nombre;
+        this.cocinero = cocinero;
+        this.estado = estado;
+    }
+    
     /**
      * @return the nombre
      */
@@ -72,7 +78,10 @@ public class Cocina {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Cocina{" + "nombre=" + nombre + ", pedidos=" + pedidos + ", cocinero=" + cocinero + ", estado=" + estado + '}';
+    }
     
 }

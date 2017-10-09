@@ -5,6 +5,10 @@
  */
 package vista;
 
+import controlador.CocinaControlador;
+import java.util.ArrayList;
+import modelo.dominio.Cocina;
+
 /**
  *
  * @author franc
@@ -15,5 +19,12 @@ public class VentanaConsola {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        CocinaControlador controladorCocina = new CocinaControlador();
+        ArrayList<Cocina> resultado = controladorCocina.obtenerCocinas();
+        
+        for (Cocina cocina : resultado) {
+            System.out.println(cocina.toString());
+        }
     }
 }
