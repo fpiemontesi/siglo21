@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package vista.interfaz;
 
-import java.sql.SQLException;
-import modelo.dominio.Producto;
+import controlador.Controlador;
 
 /**
  *
  * @author franc
  */
-public interface ProductoDao {
-    final String tabla = "Producto";
+public interface Vista {
+    void setControlador(Controlador controlador);
     
-    boolean guardar(Producto producto) throws SQLException;
+    void iniciarVista();
 }
