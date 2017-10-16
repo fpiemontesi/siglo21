@@ -15,7 +15,7 @@ public class Usuario {
     private String apellido;
     private String tipoUsuario;
     
-    public Usuario(int legajo, String nombre, String apellido, String topoUsuario){
+    public Usuario(int legajo, String nombre, String apellido, String tipoUsuario){
         this.legajo = legajo;
         this.apellido = apellido;
         this.nombre = nombre;

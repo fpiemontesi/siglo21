@@ -5,10 +5,14 @@
  */
 package dao;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import modelo.dominio.Usuario;
+
 /**
  *
  * @author franc
  */
 public interface UsuarioDao {
-    
+    ArrayList<Usuario> obtenerPorTipoDeUsuario(String tipoDeUsuario) throws SQLException;
 }

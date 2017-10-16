@@ -17,4 +17,6 @@ public interface CocinaDao {
     final String tabla = "Cocina";
     
     ArrayList<Cocina> obtenerTodas() throws SQLException;
+    
+    boolean guardar(Cocina cocina) throws SQLException;
 }

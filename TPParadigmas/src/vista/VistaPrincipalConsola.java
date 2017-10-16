@@ -53,6 +53,8 @@ public class VistaPrincipalConsola implements VistaPrincipal {
             muestraOpciones();
             operacion = leeEntero();
         }
+        System.out.println("La aplicacion se esta cerrando...");
+        System.exit(0);
     }
     
     private void muestraOpciones() {

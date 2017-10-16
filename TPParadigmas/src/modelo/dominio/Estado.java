@@ -65,4 +65,32 @@ public class Estado {
     public void setTiempoDemoraHasta(int tiempoDemoraHasta) {
         this.tiempoDemoraHasta = tiempoDemoraHasta;
     }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the tiempoDemoraDesde
+     */
+    public int getTiempoDemoraDesde() {
+        return tiempoDemoraDesde;
+    }
+
+    /**
+     * @param tiempoDemoraDesde the tiempoDemoraDesde to set
+     */
+    public void setTiempoDemoraDesde(int tiempoDemoraDesde) {
+        this.tiempoDemoraDesde = tiempoDemoraDesde;
+    }
 }

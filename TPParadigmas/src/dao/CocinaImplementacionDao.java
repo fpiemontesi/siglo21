@@ -49,5 +49,26 @@ public class CocinaImplementacionDao extends ConexionDao implements CocinaDao {
         }
         return resultado;
     }
+
+    @Override
+    public boolean guardar(Cocina cocina) throws SQLException {
+        int resultado = 0;
+        
+        try {
+            String sql = "INSERT INTO Cocina (nombre, idUsuario, idEstado) VALUES (?, ?, ?)";
+            PreparedStatement consulta = ConexionDao.obtener().prepareStatement(sql);
+            consulta.setString(1, cocina.getNombre());
+            consulta.setInt(2, cocina.getCocinero().getLegajo());
+            consulta.setInt(3, cocina.getEstado().getId());
+
+            resultado = consulta.executeUpdate();
+        } catch (SQLException ex) {
+            throw new SQLException(ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CocinaImplementacionDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado > 0;
+    }
     
 }

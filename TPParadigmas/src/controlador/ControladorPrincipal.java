@@ -8,7 +8,10 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import modelo.aplicacion.ModeloProducto;
+import modelo.aplicacion.ModeloUsuario;
+import vista.VistaPedidoConsola;
 import vista.VistaProductoConsola;
+import vista.interfaz.VistaPedido;
 import vista.interfaz.VistaPrincipal;
 import vista.interfaz.VistaProducto;
 
@@ -28,16 +31,21 @@ public class ControladorPrincipal implements Controlador {
     public void actionPerformed(ActionEvent e) {
         try {
             switch(e.getActionCommand()){
-                case VistaPrincipal.NUEVO_PEDIDO:
-                    
+                case VistaPrincipal.NUEVO_PEDIDO:                    
+                    VistaPedido vistaPedido = new VistaPedidoConsola();
+                    ModeloUsuario modeloUsuario = new ModeloUsuario();
+                    Controlador controladorPedido = new ControladorPedido(vistaPedido, modeloUsuario);
+
+                    vistaPedido.setControlador(controladorPedido);
+                    vistaPedido.iniciarVista();                    
                     break;
                 case VistaPrincipal.NUEVO_PRODUCTO:
-                    VistaProducto vista = new VistaProductoConsola();
-                    ModeloProducto modelo = new ModeloProducto();        
-                    Controlador controlador = new ControladorProducto(vista, modelo);
+                    VistaProducto vistaProducto = new VistaProductoConsola();
+                    ModeloProducto modeloProducto = new ModeloProducto();        
+                    Controlador controladorProducto = new ControladorProducto(vistaProducto, modeloProducto);
 
-                    vista.setControlador(controlador);
-                    vista.iniciarVista();
+                    vistaProducto.setControlador(controladorProducto);
+                    vistaProducto.iniciarVista();
                     break;
             }
         } catch (Exception ex) {
