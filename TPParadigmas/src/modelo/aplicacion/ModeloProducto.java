@@ -6,19 +6,28 @@
 package modelo.aplicacion;
 
 import modelo.dominio.Producto;
-import dao.ProductoDao;
-import dao.ProductoImplementacionDao;
+import dao.interfaz.ProductoDao;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.dominio.Menu;
 
 /**
  *
  * @author franc
  */
-public class ModeloProducto {
-    private ProductoDao dao;
+public class ModeloProducto extends Modelo {    
+    private final ProductoDao dao = fabricaDao.getProductoDao();
     
-    public ModeloProducto(){
-        this.dao = new ProductoImplementacionDao();
+    public ArrayList<Producto> cargarProductos(Menu menu) {
+        ArrayList<Producto> resultado = new ArrayList<Producto>();
+        try {
+            resultado = this.dao.obtenerPorMenu(menu.getNombre());
+        } catch (SQLException ex) {
+            Logger.getLogger(ModeloProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
     }
     
     public boolean guardar(Producto producto) throws SQLException {

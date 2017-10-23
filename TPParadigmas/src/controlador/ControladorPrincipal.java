@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import modelo.aplicacion.ModeloProducto;
 import modelo.aplicacion.ModeloUsuario;
-import vista.VistaPedidoConsola;
-import vista.VistaProductoConsola;
+import vista.consola.VistaPedidoConsola;
+import vista.consola.VistaProductoConsola;
 import vista.interfaz.VistaPedido;
 import vista.interfaz.VistaPrincipal;
 import vista.interfaz.VistaProducto;
@@ -34,7 +34,7 @@ public class ControladorPrincipal implements Controlador {
                 case VistaPrincipal.NUEVO_PEDIDO:                    
                     VistaPedido vistaPedido = new VistaPedidoConsola();
                     ModeloUsuario modeloUsuario = new ModeloUsuario();
-                    Controlador controladorPedido = new ControladorPedido(vistaPedido, modeloUsuario);
+                    Controlador controladorPedido = ControladorPuntoDeVenta.obtener(vistaPedido);
 
                     vistaPedido.setControlador(controladorPedido);
                     vistaPedido.iniciarVista();                    

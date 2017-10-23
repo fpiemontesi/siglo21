@@ -13,4 +13,39 @@ public class Pedido {
     private int numero;
     private int mesa;
     private Usuario mozo;
+    private Menu menu;
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public int getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(int mesa) {
+        this.mesa = mesa;
+    }
+
+    public Usuario getMozo() {
+        return mozo;
+    }
+
+    public void setMozo(Usuario mozo) {
+        this.mozo = mozo;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+    
+    
 }

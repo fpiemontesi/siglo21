@@ -5,6 +5,8 @@
  */
 package modelo.dominio;
 
+import controlador.ControladorPuntoDeVenta;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 /**

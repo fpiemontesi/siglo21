@@ -6,6 +6,7 @@
 package vista.interfaz;
 
 import java.util.ArrayList;
+import modelo.dominio.Menu;
 import modelo.dominio.Usuario;
 
 /**
@@ -16,16 +17,24 @@ public interface VistaPedido extends Vista {
     static final String GUARDAR = "guardarPedido";
     static final String CANCELAR = "cancelarPedido";
     static final String BUSCAR_MOZOS = "buscarMozos";
+    static final String BUSCAR_MENUS = "buscarMenus";
+    static final String CREAR_COCINA = "crearCocina";
     
     int getNumero();
 
-    String getMesa();
+    int getMesa();
     
-    int getMozo();
+    Usuario getMozo();
+    
+    Menu getMenu();
     
     void buscarMozos();
     
-    void cargarMozos(ArrayList<Usuario> mozo);
+    void cargarMozos(ArrayList<Usuario> mozos);
+    
+     void buscarMenus();
+    
+    void cargarMenus(ArrayList<Menu> menus);
     
     void imprimeResultado(String resultado);
     

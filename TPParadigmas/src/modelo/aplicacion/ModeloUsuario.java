@@ -5,8 +5,8 @@
  */
 package modelo.aplicacion;
 
-import dao.UsuarioDao;
-import dao.UsuarioImplementacionDao;
+import dao.interfaz.UsuarioDao;
+import dao.implementacion.UsuarioImplementacionDao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.dominio.Usuario;
@@ -15,12 +15,10 @@ import modelo.dominio.Usuario;
  *
  * @author franc
  */
-public class ModeloUsuario {
-    
-    private UsuarioDao dao;
+public class ModeloUsuario extends Modelo {
+    private final UsuarioDao dao = fabricaDao.getUsuarioDao();
     
     public ModeloUsuario(){
-        this.dao = new UsuarioImplementacionDao();
     }
     
     public ArrayList<Usuario> obtenerMozos() throws SQLException{

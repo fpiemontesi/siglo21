@@ -5,8 +5,8 @@
  */
 package controlador;
 
-import dao.CocinaDao;
-import dao.CocinaImplementacionDao;
+import dao.interfaz.CocinaDao;
+import dao.implementacion.CocinaImplementacionDao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

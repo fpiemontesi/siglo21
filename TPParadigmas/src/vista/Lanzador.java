@@ -5,6 +5,7 @@
  */
 package vista;
 
+import vista.consola.VistaPrincipalConsola;
 import controlador.Controlador;
 import controlador.ControladorPrincipal;
 import vista.interfaz.VistaPrincipal;
