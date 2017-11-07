@@ -64,6 +64,9 @@ public abstract class Menu {
     public void setProductos(ArrayList<Producto> productos) {
         this.productos = productos;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return numero + " - " + nombre;
+    }
 }

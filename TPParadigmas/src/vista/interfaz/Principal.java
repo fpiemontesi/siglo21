@@ -1,5 +1,7 @@
 package vista.interfaz;
 
+import vista.swing.VistaPedidoSwing;
+import vista.swing.VistaProductoSwing;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -93,12 +95,12 @@ public class Principal  implements ActionListener,VistaPrincipal{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==nuevoPedido) {
 			controlador.actionPerformed(new ActionEvent(this, 1, NUEVO_PEDIDO));
-			Pedido pedido = new Pedido();
+			VistaPedidoSwing pedido = new VistaPedidoSwing();
 			desktopPane.add(pedido);
 			pedido.show();
       }else if(e.getSource()==nuevoProducto) {
     		controlador.actionPerformed(new ActionEvent(this, 2, NUEVO_PRODUCTO));
-    	  	Producto producto = new Producto();
+    	  	VistaProductoSwing producto = new VistaProductoSwing();
     	  	desktopPane.add(producto);
     	  	producto.show();
       }

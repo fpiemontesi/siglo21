@@ -9,6 +9,7 @@ import vista.consola.VistaPrincipalConsola;
 import controlador.Controlador;
 import controlador.ControladorPrincipal;
 import vista.interfaz.VistaPrincipal;
+import vista.swing.VistaPrincipalSwing;
 
 /**
  *
@@ -17,7 +18,7 @@ import vista.interfaz.VistaPrincipal;
 public class Lanzador {
     
     public static void main(String[] args){
-        VistaPrincipal vistaPrincipal = new VistaPrincipalConsola();
+        VistaPrincipal vistaPrincipal = new VistaPrincipalSwing();
         Controlador controlador = new ControladorPrincipal(vistaPrincipal);
         
         vistaPrincipal.setControlador(controlador);

@@ -5,6 +5,9 @@
  */
 package vista.interfaz;
 
+import java.util.ArrayList;
+import modelo.dominio.Menu;
+
 /**
  *
  * @author franc
@@ -13,14 +16,21 @@ public interface VistaProducto extends Vista {
     
     static final String GUARDAR = "guardar";    
     static final String CANCELAR = "cancelar";
+    static final String BUSCAR_MENUS = "buscarMenus";
     
     String getNombre();
     
     String getMarca();
     
-    String getTipo();
+    String getMenu();
+    
+    void buscarMenus();
+    
+    void cargarMenus(ArrayList<Menu> menus);
     
     void imprimeResultado(String resultado);
     
     void imprimeError(Exception e);
+    
+    void cancelar();
 }

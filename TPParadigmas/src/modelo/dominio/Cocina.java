@@ -5,8 +5,6 @@
  */
 package modelo.dominio;
 
-import controlador.ControladorPuntoDeVenta;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 /**
@@ -14,15 +12,33 @@ import java.util.ArrayList;
  * @author franc
  */
 public class Cocina {
+    private int id;
     private String nombre;
     private ArrayList<Pedido> pedidos;
     private Usuario cocinero;
     private Estado estado;
-
+    
     public Cocina(String nombre, Usuario cocinero, Estado estado){
+        this(0, nombre, cocinero, estado);
+    }
+    
+    public Cocina(int id, String nombre){
+        this(id, nombre, null, null);
+    }
+
+    public Cocina(int id, String nombre, Usuario cocinero, Estado estado){
+        this.id = id;
         this.nombre = nombre;
         this.cocinero = cocinero;
         this.estado = estado;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     /**
@@ -51,6 +67,10 @@ public class Cocina {
      */
     public void setPedidos(ArrayList<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+    
+    public void crearPedidos(){
+        this.pedidos = new ArrayList();
     }
 
     /**

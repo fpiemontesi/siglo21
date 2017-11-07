@@ -7,6 +7,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import modelo.aplicacion.ModeloMenu;
 import modelo.aplicacion.ModeloProducto;
 import modelo.aplicacion.ModeloUsuario;
 import vista.consola.VistaPedidoConsola;
@@ -14,6 +15,8 @@ import vista.consola.VistaProductoConsola;
 import vista.interfaz.VistaPedido;
 import vista.interfaz.VistaPrincipal;
 import vista.interfaz.VistaProducto;
+import vista.swing.VistaPedidoSwing;
+import vista.swing.VistaProductoSwing;
 
 /**
  *
@@ -32,7 +35,7 @@ public class ControladorPrincipal implements Controlador {
         try {
             switch(e.getActionCommand()){
                 case VistaPrincipal.NUEVO_PEDIDO:                    
-                    VistaPedido vistaPedido = new VistaPedidoConsola();
+                    VistaPedido vistaPedido = new VistaPedidoSwing();
                     ModeloUsuario modeloUsuario = new ModeloUsuario();
                     Controlador controladorPedido = ControladorPuntoDeVenta.obtener(vistaPedido);
 
@@ -40,9 +43,10 @@ public class ControladorPrincipal implements Controlador {
                     vistaPedido.iniciarVista();                    
                     break;
                 case VistaPrincipal.NUEVO_PRODUCTO:
-                    VistaProducto vistaProducto = new VistaProductoConsola();
+                    VistaProducto vistaProducto = new VistaProductoSwing();
                     ModeloProducto modeloProducto = new ModeloProducto();        
-                    Controlador controladorProducto = new ControladorProducto(vistaProducto, modeloProducto);
+                    ModeloMenu modeloMenu = new ModeloMenu(modeloProducto);
+                    Controlador controladorProducto = new ControladorProducto(vistaProducto, modeloProducto, modeloMenu);
 
                     vistaProducto.setControlador(controladorProducto);
                     vistaProducto.iniciarVista();

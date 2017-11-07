@@ -7,6 +7,7 @@ package modelo.aplicacion;
 
 import dao.interfaz.PedidoDao;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelo.dominio.Pedido;
 
 /**
@@ -15,8 +16,16 @@ import modelo.dominio.Pedido;
  */
 public class ModeloPedido extends Modelo {
     private final PedidoDao dao = fabricaDao.getPedidoDao();
+    
+    public ArrayList<Pedido> obtenerAbiertos() throws SQLException{
+        return this.dao.obtenerAbiertos();
+    }
        
     public boolean crear(Pedido pedido) throws SQLException{
         return this.dao.guardar(pedido);
+    }
+    
+    public boolean cerrar(Pedido pedido) throws SQLException{
+        return this.dao.cerrar(pedido);
     }
 }

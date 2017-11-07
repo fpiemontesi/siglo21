@@ -14,6 +14,16 @@ public class Pedido {
     private int mesa;
     private Usuario mozo;
     private Menu menu;
+    private Cocina cocina;
+    
+    public Pedido(){
+        
+    }
+
+    public Pedido(int numero, int mesa) {
+        this.numero = numero;
+        this.mesa = mesa;
+    }
 
     public int getNumero() {
         return numero;
@@ -46,6 +56,17 @@ public class Pedido {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-    
-    
+
+    public Cocina getCocina() {
+        return cocina;
+    }
+
+    public void setCocina(Cocina cocina) {
+        this.cocina = cocina;
+    }
+
+    @Override
+    public String toString() {
+        return numero + " - " + mesa;
+    }
 }

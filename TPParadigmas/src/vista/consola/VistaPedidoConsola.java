@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import modelo.dominio.Menu;
+import modelo.dominio.Pedido;
 import modelo.dominio.Usuario;
 import vista.interfaz.VistaPedido;
 
@@ -28,10 +29,13 @@ public class VistaPedidoConsola implements VistaPedido {
     private int mesa;
     private int mozoId;
     private int menuId;
+    private int pedidoId;
     private Usuario mozo;
     private Menu menu;
+    private Pedido pedido;
     private ArrayList<Usuario> mozos;
     private ArrayList<Menu> menus;
+    private ArrayList<Pedido> pedidos;
 
     @Override
     public int getNumero() {
@@ -49,6 +53,11 @@ public class VistaPedidoConsola implements VistaPedido {
     }
     
     @Override
+    public Pedido getPedidoACerrar(){
+        return this.pedido;
+    }
+    
+    @Override
     public Menu getMenu(){
         return this.menu;
     }
@@ -63,7 +72,17 @@ public class VistaPedidoConsola implements VistaPedido {
         this.mozos = mozos;
     }
     
-     @Override
+    @Override
+    public void buscarPedidos(){
+        controlador.actionPerformed(new ActionEvent(this, 0, BUSCAR_PEDIDOS));
+    }
+    
+    @Override
+    public void cargarPedidos(ArrayList<Pedido> pedidos){
+        this.pedidos = pedidos;
+    }
+    
+    @Override
     public void buscarMenus() {
         controlador.actionPerformed(new ActionEvent(this, 0, BUSCAR_MENUS));
     }
@@ -111,6 +130,10 @@ public class VistaPedidoConsola implements VistaPedido {
                     }
                     break;
                 case 2:
+                    buscarPedidos();
+                    solicitarPedido();
+                    controlador.actionPerformed(new ActionEvent(this, operacion, CERRAR_PEDIDO));
+                case 3:
                 case -1:
                     controlador.actionPerformed(new ActionEvent(this, operacion, CANCELAR));
                     break;
@@ -127,8 +150,35 @@ public class VistaPedidoConsola implements VistaPedido {
         System.out.println("---- MENU PEDIDO ----");
         System.out.println("\nIndica la operación que quiere realizar:");
         System.out.println("1: Guardar");
-        System.out.println("2: Cancelar");
+        System.out.println("2: Cerrar Pedido");
+        System.out.println("3: Cancelar");
         System.out.println("-1: Salir");
+    }
+    
+    private void solicitarPedido(){
+        boolean seleccionValida = false;
+        do {
+            System.out.println("\nSeleccione un pedido de la lista (por codigo):");
+            mostrarPedidos();
+            this.pedidoId = leeEntero();
+            
+            for (Pedido item : pedidos) {
+                if (item.getNumero() == this.pedidoId){
+                    this.pedido = item;
+                    seleccionValida = true;   
+                    break;
+                }
+            }
+            
+            if (!seleccionValida)
+                System.out.println("Ha seleccionado un pedido inexistente, intentelo nuevamente...");
+        } while (!seleccionValida);
+    }
+    
+    private void mostrarPedidos(){
+        for (Pedido item : pedidos) {
+            System.out.println(String.format("NRO: %s -  MESA: %s", item.getNumero(), item.getMesa()));
+        }
     }
     
     private void solicitarInformacion(){
@@ -210,6 +260,11 @@ public class VistaPedidoConsola implements VistaPedido {
         } catch (IOException | NumberFormatException e) {
             return -1;
         }
+    }
+
+    @Override
+    public void cancelar() {
+        //volver al menu principal
     }
     
 }

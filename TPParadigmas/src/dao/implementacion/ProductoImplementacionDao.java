@@ -30,10 +30,11 @@ public class ProductoImplementacionDao implements ProductoDao {
         try {
             conexion.conectar();
             
-            String sql = "INSERT INTO Producto (Nombre, Marca) VALUES (?, ?)";
+            String sql = "INSERT INTO Producto (Nombre, Marca, Menu) VALUES (?, ?, ?)";
             PreparedStatement consulta = conexion.getConnection().prepareStatement(sql);
             consulta.setString(1, producto.getNombre());
             consulta.setString(2, producto.getMarca());
+            consulta.setString(3, producto.getMenu().toUpperCase());
 
             resultado = consulta.executeUpdate();
             
@@ -52,13 +53,13 @@ public class ProductoImplementacionDao implements ProductoDao {
         try {
             conexion.conectar();
             
-            String sql = "SELECT Id, Nombre, Marca FROM Producto WHERE menu = ?";
+            String sql = "SELECT Id, Nombre, Marca, Menu FROM Producto WHERE menu = ?";
             PreparedStatement consulta = conexion.getConnection().prepareStatement(sql);
             consulta.setString(1, menu);
 
             ResultSet rs = consulta.executeQuery();
             while (rs.next()){
-                resultado.add(new Producto(rs.getString("Nombre"), rs.getString("Marca")));
+                resultado.add(new Producto(rs.getString("Nombre"), rs.getString("Marca"), rs.getString("Menu")));
             }
             
             conexion.desconectar();

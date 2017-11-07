@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import modelo.dominio.Menu;
 import vista.interfaz.VistaProducto;
 
 /**
@@ -23,6 +25,10 @@ public class VistaProductoConsola implements VistaProducto {
     private String nombre;
     private String marca;
     private String tipo;
+    private String menu;
+    
+    
+    private ArrayList<Menu> menus;
     
     @Override
     public void imprimeResultado(String resultado) {
@@ -43,15 +49,30 @@ public class VistaProductoConsola implements VistaProducto {
     public String getMarca() {
         return this.marca;
     }
-
+    
     @Override
-    public String getTipo() {
-        return this.tipo;
+    public String getMenu(){
+        return this.menu;
+    }
+    
+    @Override
+    public void buscarMenus() {
+        controlador.actionPerformed(new ActionEvent(this, 0, BUSCAR_MENUS));
+    }
+    
+    @Override
+    public void cargarMenus(ArrayList<Menu> menus){
+        this.menus = menus;
     }
 
     @Override
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
+    }
+    
+    @Override
+    public void cancelar() {
+        //vuelve menu anterior
     }
 
     @Override
@@ -67,8 +88,9 @@ public class VistaProductoConsola implements VistaProducto {
         while (operacion != -1) {
             switch (operacion) {
                 case 1:
+                    buscarMenus();
                     solicitarInformacion();
-                    if (this.marca.length() > 2 && this.tipo.length() > 2 && this.nombre.length() > 2) {
+                    if (this.marca.length() > 2 && this.nombre.length() > 2) {
                         controlador.actionPerformed(new ActionEvent(this, operacion, GUARDAR));
                     } else {
                         System.out.println("Por favor ingrese un nombre, marca y tipo para guardar el producto");
@@ -92,8 +114,33 @@ public class VistaProductoConsola implements VistaProducto {
         this.nombre = leeCadena();
         System.out.println("Ingrese la marca:");
         this.marca = leeCadena();
-        System.out.println("Ingrese el tipo:");
-        this.tipo = leeCadena();
+        solicitarMenu();
+    }
+    
+    private void solicitarMenu() {
+        boolean seleccionValida = false;
+        do {
+            System.out.println("\nSeleccione un menu de la lista (por codigo):");
+            mostrarMenu();
+            int menuId = leeEntero();
+            
+            for (Menu item : menus) {
+                if (item.getNumero() == menuId){
+                    this.menu = item.getNombre();
+                    seleccionValida = true;
+                    break;
+                }                    
+            }
+            
+            if (!seleccionValida)
+                System.out.println("Ha seleccionado un menu inexistente, intentelo nuevamente...");
+        } while (!seleccionValida);
+    }    
+    
+    private void mostrarMenu(){
+        for (Menu item : menus) {
+            System.out.println(String.format("%s - %s, %s", item.getNumero(), item.getNombre(), item.getDescripcion()));
+        }
     }
     
     private void muestraOpciones() {
@@ -123,5 +170,4 @@ public class VistaProductoConsola implements VistaProducto {
             return -1;
         }
     }
-    
 }

@@ -38,13 +38,49 @@ public class ModeloCocina extends Modelo implements Observer {
         return resultado;
     }
     
-    public ArrayList<Cocina> obtenerTodas() {
-        try {
-            this.cocinas = this.dao.obtenerTodas();
-        } catch (SQLException ex) {
-            Logger.getLogger(ModeloCocina.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public ArrayList<Cocina> obtenerTodas() throws SQLException{
+        this.cocinas = this.dao.obtenerTodas();
         return this.getCocinas();
+    }
+    
+    public Cocina obtenerDisponible() throws SQLException{
+        Cocina resultado = null;
+        
+        int tiempoPorPedido = 2;//en minutos
+        
+        obtenerTodas();
+        Estado estadoDemorado = fabricaDao.getEstadoDao().obtenerDemorado();
+
+        for (Cocina cocina : this.cocinas) {
+            fabricaDao.getPedidoDao().cargarPedidos(cocina);
+            int tiempoTotalCocina = cocina.getPedidos().size() * tiempoPorPedido;
+            Estado estadoCocina = fabricaDao.getEstadoDao().obtenerPorTiempoDemora(tiempoPorPedido);
+            if (estadoCocina != estadoDemorado){
+                resultado = cocina;
+                break;
+            }
+        }
+        
+        return resultado;
+    }
+    
+    public boolean hayDisponibilidad() throws SQLException {
+        boolean hayDisponibilidad = true;
+        int tiempoPorPedido = 2;//en minutos
+        
+        obtenerTodas();
+        Estado estadoDemorado = fabricaDao.getEstadoDao().obtenerDemorado();
+
+        for (Cocina cocina : this.cocinas) {
+            fabricaDao.getPedidoDao().cargarPedidos(cocina);
+            int tiempoTotalCocina = cocina.getPedidos().size() * tiempoPorPedido;
+            Estado estadoCocina = fabricaDao.getEstadoDao().obtenerPorTiempoDemora(tiempoPorPedido);
+            if (estadoCocina == estadoDemorado){
+                hayDisponibilidad = false;
+            }
+        }
+        
+        return hayDisponibilidad;
     }
 
     public ArrayList<Cocina> getCocinas() {
@@ -56,7 +92,7 @@ public class ModeloCocina extends Modelo implements Observer {
         try {
             Usuario usuario = fabricaDao.getUsuarioDao().obtenerAdministrador();
             Estado estadoLiviano = fabricaDao.getEstadoDao().obtenerLiviano();
-            Cocina cocina = new Cocina("Nueva cocina", usuario, estadoLiviano);
+            Cocina cocina = new Cocina("Nueva cocina Generada", usuario, estadoLiviano);
             this.dao.guardar(cocina);
         } catch (SQLException ex) {
             Logger.getLogger(ModeloCocina.class.getName()).log(Level.SEVERE, null, ex);

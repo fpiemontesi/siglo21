@@ -7,6 +7,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import modelo.aplicacion.ModeloMenu;
 import modelo.aplicacion.ModeloProducto;
 import modelo.dominio.Producto;
 import vista.interfaz.VistaProducto;
@@ -18,11 +19,13 @@ import vista.interfaz.VistaProducto;
 public class ControladorProducto implements Controlador {
     
     private VistaProducto vista;
-    private ModeloProducto modelo;
+    private ModeloProducto modeloProducto;
+    private ModeloMenu modeloMenu;
     
-    public ControladorProducto(VistaProducto vista, ModeloProducto modelo){
+    public ControladorProducto(VistaProducto vista, ModeloProducto modeloProducto, ModeloMenu modeloMenu){
         this.vista = vista;
-        this.modelo = modelo;
+        this.modeloProducto = modeloProducto;
+        this.modeloMenu = modeloMenu;
     }
 
     @Override
@@ -31,9 +34,9 @@ public class ControladorProducto implements Controlador {
             
             switch(e.getActionCommand()){
                 case VistaProducto.GUARDAR:
-                    Producto producto = new Producto(vista.getNombre(), vista.getMarca());
+                    Producto producto = new Producto(vista.getNombre(), vista.getMarca(), vista.getMenu());
                     
-                    boolean resultado = modelo.guardar(producto);   
+                    boolean resultado = modeloProducto.guardar(producto);   
                     
                     String resultadoGuardado;
                     if (resultado)
@@ -43,8 +46,11 @@ public class ControladorProducto implements Controlador {
                     
                     vista.imprimeResultado(resultadoGuardado);
                     break;
+                case VistaProducto.BUSCAR_MENUS:
+                    this.vista.cargarMenus(this.modeloMenu.obtenerTodos());
+                    break;
                 case VistaProducto.CANCELAR:
-                    
+                    this.vista.cancelar();
                     break;
             }
         } catch (Exception ex) {

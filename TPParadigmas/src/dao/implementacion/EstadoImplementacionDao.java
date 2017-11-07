@@ -57,6 +57,11 @@ public class EstadoImplementacionDao implements EstadoDao {
     public Estado obtenerLiviano() throws SQLException {
         return this.obtenerPorNombre("Liviano");
     }
+    
+    @Override
+    public Estado obtenerDemorado() throws SQLException {
+        return obtenerPorNombre("demorado");
+    }
 
     @Override
     public Estado obtenerPorTiempoDemora(int tiempoDemora) throws SQLException {

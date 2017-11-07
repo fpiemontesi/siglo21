@@ -15,4 +15,5 @@ import modelo.dominio.Estado;
 public interface EstadoDao {
     Estado obtenerPorTiempoDemora(int tiempoDemora) throws SQLException;
     Estado obtenerLiviano() throws SQLException;
+    Estado obtenerDemorado() throws SQLException;
 }

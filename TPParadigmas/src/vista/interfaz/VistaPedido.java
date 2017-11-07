@@ -7,6 +7,7 @@ package vista.interfaz;
 
 import java.util.ArrayList;
 import modelo.dominio.Menu;
+import modelo.dominio.Pedido;
 import modelo.dominio.Usuario;
 
 /**
@@ -15,9 +16,11 @@ import modelo.dominio.Usuario;
  */
 public interface VistaPedido extends Vista {
     static final String GUARDAR = "guardarPedido";
+    static final String CERRAR_PEDIDO = "cerrarPedido";
     static final String CANCELAR = "cancelarPedido";
     static final String BUSCAR_MOZOS = "buscarMozos";
     static final String BUSCAR_MENUS = "buscarMenus";
+    static final String BUSCAR_PEDIDOS = "buscarPedidos";
     static final String CREAR_COCINA = "crearCocina";
     
     int getNumero();
@@ -28,15 +31,23 @@ public interface VistaPedido extends Vista {
     
     Menu getMenu();
     
+    Pedido getPedidoACerrar();
+    
     void buscarMozos();
     
     void cargarMozos(ArrayList<Usuario> mozos);
     
-     void buscarMenus();
+    void buscarMenus();
     
     void cargarMenus(ArrayList<Menu> menus);
+    
+    void buscarPedidos();
+    
+    void cargarPedidos(ArrayList<Pedido> pedidos);
     
     void imprimeResultado(String resultado);
     
     void imprimeError(Exception e);
+    
+    void cancelar();
 }

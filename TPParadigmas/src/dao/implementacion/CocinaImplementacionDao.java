@@ -32,7 +32,7 @@ public class CocinaImplementacionDao implements CocinaDao {
         try {
             conexion.conectar();
             
-            String sql = "SELECT c.Nombre as NombreCocina, c.idUsuario, u.nombre as nombreUsuario, u.apellido as ApellidoUsuario, u.tipoUsuario, c.idEstado, e.nombre as NombreEstado, e.descripcion as DescripcionEstado, e.tiempoDemoraDesde, e.tiempoDemoraHasta "
+            String sql = "SELECT c.Nombre as NombreCocina, c.idUsuario, u.nombre as nombreUsuario, u.apellido as ApellidoUsuario, u.tipoUsuario, c.Id as IdCocina, c.idEstado, e.nombre as NombreEstado, e.descripcion as DescripcionEstado, e.tiempoDemoraDesde, e.tiempoDemoraHasta "
                     + "FROM Cocina c "
                     + "INNER JOIN Usuario u ON u.id = c.idUsuario "
                     + "INNER JOIN Estado e ON e.id = c.idEstado ";
@@ -45,7 +45,7 @@ public class CocinaImplementacionDao implements CocinaDao {
             while(rs.next()){
                cocinero = new Usuario(rs.getInt("idUsuario"), rs.getString("nombreUsuario"), rs.getString("apellidoUsuario"), rs.getString("tipoUsuario"));
                estado = new Estado(rs.getInt("idEstado"), rs.getString("nombreEstado"), rs.getString("descripcionEstado"), rs.getInt("tiempoDemoraDesde"), rs.getInt("tiempoDemoraHasta"));
-               cocina = new Cocina(rs.getString("NombreCocina"), cocinero, estado);
+               cocina = new Cocina(rs.getInt("idCocina"), rs.getString("NombreCocina"), cocinero, estado);
                
                resultado.add(cocina);
             }
@@ -78,6 +78,5 @@ public class CocinaImplementacionDao implements CocinaDao {
         }
         
         return resultado > 0;
-    }
-    
+    }    
 }

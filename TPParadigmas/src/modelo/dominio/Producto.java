@@ -12,10 +12,12 @@ package modelo.dominio;
 public class Producto {
     private String nombre;
     private String marca;
+    private String menu;
 
-    public Producto(String nombre, String marca){
+    public Producto(String nombre, String marca, String menu){
         this.nombre = nombre;
         this.marca = marca;
+        this.menu = menu;
     }
     
     /**
@@ -45,6 +47,12 @@ public class Producto {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    
-    
+
+    public String getMenu() {
+        return menu;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
 }

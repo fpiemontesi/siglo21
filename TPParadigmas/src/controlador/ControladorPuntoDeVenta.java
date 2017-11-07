@@ -61,12 +61,19 @@ public class ControladorPuntoDeVenta implements Controlador, Subject {
                     nuevoPedido.setMozo(this.vista.getMozo());
                     nuevoPedido.setNumero(this.vista.getNumero());
                     
-                    this.modeloPedido.crear(nuevoPedido);
-                    
-                    //SI SE CUMPLE UNA CONDICION DETERMINADA NOTIFICAR A TODOS LOS OBSERVADORES
-                    if (true){
-                     this.notifyObservers();   
+                    if (!this.modeloCocina.hayDisponibilidad()){
+                        this.notifyObservers();   
                     }
+                    
+                    nuevoPedido.setCocina(modeloCocina.obtenerDisponible());
+                    
+                    if (this.modeloPedido.crear(nuevoPedido)){
+                        this.vista.imprimeResultado("Se ha guardado el pedido con éxito");
+                    }
+                    else{
+                        this.vista.imprimeResultado("No se ha podido guardar el pedido, consulte con el administrador");
+                    }
+                    
                     break;
                 case VistaPedido.BUSCAR_MOZOS:
                     this.vista.cargarMozos(modeloUsuario.obtenerMozos());
@@ -74,11 +81,14 @@ public class ControladorPuntoDeVenta implements Controlador, Subject {
                 case VistaPedido.BUSCAR_MENUS:
                     this.vista.cargarMenus(modeloMenu.obtenerTodos());
                     break;
-                case VistaPedido.CREAR_COCINA:
-                    //TODO CREAR COCINA
+                case VistaPedido.BUSCAR_PEDIDOS:
+                    this.vista.cargarPedidos(modeloPedido.obtenerAbiertos());
+                    break;
+                case VistaPedido.CERRAR_PEDIDO:
+                    this.modeloPedido.cerrar(this.vista.getPedidoACerrar());
                     break;
                 case VistaPedido.CANCELAR:
-
+                    this.vista.cancelar();
                     break;
             }
         } catch (Exception ex) {
