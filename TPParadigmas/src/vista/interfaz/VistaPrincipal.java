@@ -12,6 +12,5 @@ package vista.interfaz;
 public interface VistaPrincipal extends Vista {
     static final String NUEVO_PRODUCTO = "nuevoProducto";
     static final String NUEVO_PEDIDO = "nuevoPedido";
-    
-    
+    static final String FINALIZAR_PEDIDO = "finalizarPedido";    
 }

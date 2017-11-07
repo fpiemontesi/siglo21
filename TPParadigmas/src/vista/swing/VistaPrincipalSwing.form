@@ -30,6 +30,11 @@
               <Component id="btnNuevoPedido" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnFinalizarPedido" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -40,7 +45,9 @@
                   <Component id="btnNuevoProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnNuevoPedido" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="145" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="btnFinalizarPedido" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="87" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,6 +63,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuevo Pedido"/>
         <Property name="name" type="java.lang.String" value="btnNuevoPedido" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnFinalizarPedido">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Finalizar Pedido"/>
       </Properties>
     </Component>
   </SubComponents>

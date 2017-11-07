@@ -15,6 +15,7 @@ import vista.consola.VistaProductoConsola;
 import vista.interfaz.VistaPedido;
 import vista.interfaz.VistaPrincipal;
 import vista.interfaz.VistaProducto;
+import vista.swing.VistaFinalizarPedidoSwing;
 import vista.swing.VistaPedidoSwing;
 import vista.swing.VistaProductoSwing;
 
@@ -36,11 +37,17 @@ public class ControladorPrincipal implements Controlador {
             switch(e.getActionCommand()){
                 case VistaPrincipal.NUEVO_PEDIDO:                    
                     VistaPedido vistaPedido = new VistaPedidoSwing();
-                    ModeloUsuario modeloUsuario = new ModeloUsuario();
                     Controlador controladorPedido = ControladorPuntoDeVenta.obtener(vistaPedido);
 
                     vistaPedido.setControlador(controladorPedido);
                     vistaPedido.iniciarVista();                    
+                    break;
+                case VistaPrincipal.FINALIZAR_PEDIDO:
+                    VistaPedido vistaFinalizarPedido = new VistaFinalizarPedidoSwing();
+                    ControladorPuntoDeVenta controladorFinalizarPedido = ControladorPuntoDeVenta.obtener(vistaFinalizarPedido);
+                    
+                    controladorFinalizarPedido.obtenerVista().setControlador(controladorFinalizarPedido);
+                    controladorFinalizarPedido.obtenerVista().iniciarVista();
                     break;
                 case VistaPrincipal.NUEVO_PRODUCTO:
                     VistaProducto vistaProducto = new VistaProductoSwing();

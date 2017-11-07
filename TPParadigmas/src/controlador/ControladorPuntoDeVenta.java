@@ -49,6 +49,10 @@ public class ControladorPuntoDeVenta implements Controlador, Subject {
             puntoDeVenta = new ControladorPuntoDeVenta(vista);
         return puntoDeVenta;
     }
+    
+    public VistaPedido obtenerVista(){
+        return this.vista;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

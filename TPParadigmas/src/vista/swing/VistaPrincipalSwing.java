@@ -6,8 +6,6 @@
 package vista.swing;
 
 import controlador.Controlador;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import vista.interfaz.VistaPrincipal;
 
 /**
@@ -34,6 +32,7 @@ public class VistaPrincipalSwing extends javax.swing.JFrame implements VistaPrin
 
         btnNuevoProducto = new javax.swing.JButton();
         btnNuevoPedido = new javax.swing.JButton();
+        btnFinalizarPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,6 +41,8 @@ public class VistaPrincipalSwing extends javax.swing.JFrame implements VistaPrin
 
         btnNuevoPedido.setText("Nuevo Pedido");
         btnNuevoPedido.setName("btnNuevoPedido"); // NOI18N
+
+        btnFinalizarPedido.setText("Finalizar Pedido");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,6 +54,10 @@ public class VistaPrincipalSwing extends javax.swing.JFrame implements VistaPrin
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(btnNuevoPedido)
                 .addGap(44, 44, 44))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFinalizarPedido)
+                .addGap(136, 136, 136))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,13 +66,16 @@ public class VistaPrincipalSwing extends javax.swing.JFrame implements VistaPrin
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevoProducto)
                     .addComponent(btnNuevoPedido))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(btnFinalizarPedido)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalizarPedido;
     private javax.swing.JButton btnNuevoPedido;
     private javax.swing.JButton btnNuevoProducto;
     // End of variables declaration//GEN-END:variables
@@ -79,6 +87,9 @@ public class VistaPrincipalSwing extends javax.swing.JFrame implements VistaPrin
         
         this.btnNuevoProducto.addActionListener(controlador);
         this.btnNuevoProducto.setActionCommand(VistaPrincipal.NUEVO_PRODUCTO);
+        
+        this.btnFinalizarPedido.addActionListener(controlador);
+        this.btnFinalizarPedido.setActionCommand(VistaPrincipal.FINALIZAR_PEDIDO);
     }
 
     @Override

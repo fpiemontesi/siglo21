@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import modelo.dominio.Menu;
 import vista.interfaz.VistaProducto;
 
-public class VistaProductoSwing extends JFrame implements VistaProducto {
+public class VistaProductoSwing extends javax.swing.JFrame implements VistaProducto {
 
     private Controlador controlador;
     private JTextField txtNombre;
@@ -29,9 +29,6 @@ public class VistaProductoSwing extends JFrame implements VistaProducto {
     private JButton btnGuardar = new JButton("Aceptar");
     private JButton btnCancelar = new JButton("Cancelar");
 
-    /**
-     * Create the frame.
-     */
     public VistaProductoSwing() {
         setTitle("Nuevo Producto");
         setBounds(100, 100, 450, 300);
